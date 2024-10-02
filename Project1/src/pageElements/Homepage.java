@@ -1,5 +1,6 @@
 package pageElements;
 
+import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
@@ -7,18 +8,44 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 public class Homepage {
 
 	WebDriver driver;
-	
+	WebDriverWait wait;
 	public Homepage(WebDriver driver) {
 		this.driver= driver;
 		PageFactory.initElements(driver, this);
+		wait=new WebDriverWait(driver,Duration.ofSeconds(10));
 	}
 	
 	@FindBy(xpath="//div[@class='app_logo']") WebElement appLogo;
+	@FindBy(xpath="//select[@class='product_sort_container']")  WebElement sortBtn;
+	@FindBy(xpath="//select[@class='product_sort_container']/option") List<WebElement> DropdownOptions;
+	@FindBy(xpath="//div[@class='inventory_item_name ']")
+	public List<WebElement> sortOptions;
+	@FindBy(id="react-burger-menu-btn") WebElement hamburgerButton;
+	@FindBy(id="react-burger-cross-btn") WebElement hamburgerCloseButton;
+	@FindBy(xpath="//a[contains(text(),'Twitter')]") WebElement Twitter;
+	@FindBy (id="inventory_sidebar_link") WebElement AllItemsLink;
+	@FindBy (id="about_sidebar_link")WebElement AboutLink;
+	@FindBy(id="logout_sidebar_link")WebElement LogoutLink;
+	@FindBy(xpath="//div[@class='inventory_list']/div/div[2]/div[1]") List<WebElement> ProductsDiscription;
+	@FindBy(xpath="//div[@class='inventory_item_name ']") List<WebElement> ProductsName;
+	@FindBy(xpath = "//div[@class='inventory_item_price']")  List<WebElement> ProductsPrice;
+	@FindBy(xpath ="//a[@class='shopping_cart_link']")WebElement CartLink;
+	@FindBy(xpath ="//div[@class='inventory_details_desc_container']/button")WebElement ProductAddToCartBtn;
+	@FindBy(xpath="//*[@id=\"shopping_cart_container\"]/a/span")  WebElement cartContent;
+	@FindBy (xpath ="button[@id='back-to-products']") WebElement BackToProductbtn; 
+	@FindBy(xpath="//ul[@class='social']/li") List<WebElement> socialNetworks;
+	@FindBy(xpath="//div[@class='footer_copy']") WebElement FooterCopy;
+	@FindBy (xpath="//div[@class='bm-menu']/nav/a") List <WebElement> HamburgerMenuList;
+	
+	
 	
 	public void validateHomepage() {
 		
@@ -26,8 +53,6 @@ public class Homepage {
 		System.out.println("Landed to homepage");
 		
 	}
-	@FindBy(xpath="//select[@class='product_sort_container']")  WebElement sortBtn;
-	@FindBy(xpath="//div[@class='inventory_item_name ']") List<WebElement> sortOptions;
 	
 	public void validSortBtn() {
 		
@@ -38,34 +63,42 @@ public class Homepage {
 		System.out.println("Dropdown arrow is disabled");
 	}
 	
-	public List<WebElement> productNamesZtoA(){
-		System.out.println("======Sort Z To A======");
-		System.out.println("Number of products:" +sortOptions.size());
-		for(WebElement ZtoA: sortOptions) {
-			System.out.println("List- " + ZtoA.getText());
+//	public List<WebElement> productNamesZtoA(){
+//		System.out.println("======Sort Z To A======");
+//		System.out.println("Number of products:" +sortOptions.size());
+//		for(WebElement ZtoA: sortOptions) {
+//			System.out.println("List- " + ZtoA.getText());
+//		}
+//		return sortOptions;
+//	}
+//	
+//	public List<WebElement> priceLowToHigh(){
+//		System.out.println("======Low to High======");
+//		System.out.println("Number of products:" +sortOptions.size());
+//		for(WebElement LowToHigh: sortOptions) {
+//			System.out.println("List- " +LowToHigh.getText());
+//		}
+//		return sortOptions;
+//	}
+//		public List<WebElement> priceHighToLow(){
+//			System.out.println("======High to Low======");
+//			System.out.println("Number of products:" +sortOptions.size());
+//			for(WebElement HighToLow: sortOptions) {
+//				System.out.println("List- " +HighToLow.getText());
+//			}
+//			return sortOptions;
+//	}
+		public boolean presenceOfhamburgerbutton() {
+			return hamburgerButton.isDisplayed();
 		}
-		return sortOptions;
-	}
-	
-	public List<WebElement> priceLowToHigh(){
-		System.out.println("======Low to High======");
-		System.out.println("Number of products:" +sortOptions.size());
-		for(WebElement LowToHigh: sortOptions) {
-			System.out.println("List- " +LowToHigh.getText());
+		public void openHamburgerMenu() {
+			hamburgerButton.click();
+			wait.until(ExpectedConditions.visibilityOf(hamburgerCloseButton));
 		}
-		return sortOptions;
-	}
-		public List<WebElement> priceHighToLow(){
-			System.out.println("======High to Low======");
-			System.out.println("Number of products:" +sortOptions.size());
-			for(WebElement HighToLow: sortOptions) {
-				System.out.println("List- " +HighToLow.getText());
-			}
-			return sortOptions;
-	}
-		@FindBy(id="react-burger-menu-btn") WebElement hamburgerButton;
-		@FindBy(id="react-burger-cross-btn") WebElement hamburgerCloseButton;
-		public void validateBurgerButton() {
+		public boolean isHamburgerMenuOpen() {
+			return HamburgerMenuList.size()>0;
+		}
+		public void enabledHamburgerButton() {
 			if(hamburgerButton.isEnabled()) {
 				System.out.println("Hamburger button is enabled");
 			}
@@ -74,7 +107,19 @@ public class Homepage {
 			}
 		}
 		
-		public void burgerCloseButton() {
+		
+		public void clickOnAllItemsLink() {
+			AllItemsLink.click();
+		}
+		public void clickonAboutLink()
+		{
+			AboutLink.click();
+		}
+		public void clickOnLogoutLink()
+		{
+			LogoutLink.click();
+		}
+		public void hamburgerCloseButton() {
 			if(hamburgerCloseButton.isEnabled()) {
 				System.out.println("Hamburger Close button is enabled");
 			}
@@ -83,7 +128,45 @@ public class Homepage {
 			}
 		}
 		
-		@FindBy(xpath="//a[contains(text(),'Twitter')]") WebElement Twitter;
+		public String defaultDropdownValue() {
+			Select defaultvalue= new Select(sortBtn);
+			return defaultvalue.getFirstSelectedOption().getText();
+		}
+		public List<WebElement> dropdownContents(){
+			return DropdownOptions;
+		}
+		public String selectSortingOption(String option) {
+			Select dropdown= new Select(sortBtn);
+			dropdown.selectByValue(option);
+			return dropdown.getFirstSelectedOption().getText();
+		}
+		public List<WebElement> getProductDiscription(){
+			return ProductsDiscription;
+		}
+		public List<WebElement> getProductName(){
+			return ProductsName;
+		}
+		public List<WebElement> getProductPrice(){
+			return ProductsPrice;
+		}
+		public void clickCart() 
+		{
+			CartLink.click();
+		}
+		public String productsAddToCart() {
+			return ProductAddToCartBtn.getText();
+		}
+		public void clickOnProductsAddToCart() {
+			ProductAddToCartBtn.click();
+		}
+		public String getCartValue() {
+			return cartContent.getText();
+		}
+		
+		public void clickonBackToProduct() {
+			BackToProductbtn.click();
+		}
+		
 		public void twitter() {
 		
 		Actions a = new Actions(driver);
@@ -94,6 +177,15 @@ public class Homepage {
 		String twitterTitle= driver.getTitle();
 		Assert.assertEquals(twitterTitle, "Swag Labs");
 		}
+		
+		public String footerCopy() {
+			return FooterCopy.getText();
+		}
+		public List<WebElement> socialNetworks(){
+			return socialNetworks;
+		}
+		
+		
 }
 
 

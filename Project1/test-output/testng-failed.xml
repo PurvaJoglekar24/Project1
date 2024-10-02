@@ -3,11 +3,15 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="pageElements.Login">
+      <class name="test.BaseTest">
         <methods>
-          <include name="placeholders"/>
+          <include name="LoginWithInvalidUsername"/>
+          <include name="LoginWithEnterKey"/>
+          <include name="LoginWithValidCredentials" invocation-numbers="0 1 2 3 4"/>
+          <include name="LoginWithInvalidPassword"/>
+          <include name="launchBrowserAndInitialization"/>
         </methods>
-      </class> <!-- pageElements.Login -->
+      </class> <!-- test.BaseTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
