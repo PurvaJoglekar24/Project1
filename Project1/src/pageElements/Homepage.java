@@ -63,31 +63,7 @@ public class Homepage {
 		System.out.println("Dropdown arrow is disabled");
 	}
 	
-//	public List<WebElement> productNamesZtoA(){
-//		System.out.println("======Sort Z To A======");
-//		System.out.println("Number of products:" +sortOptions.size());
-//		for(WebElement ZtoA: sortOptions) {
-//			System.out.println("List- " + ZtoA.getText());
-//		}
-//		return sortOptions;
-//	}
-//	
-//	public List<WebElement> priceLowToHigh(){
-//		System.out.println("======Low to High======");
-//		System.out.println("Number of products:" +sortOptions.size());
-//		for(WebElement LowToHigh: sortOptions) {
-//			System.out.println("List- " +LowToHigh.getText());
-//		}
-//		return sortOptions;
-//	}
-//		public List<WebElement> priceHighToLow(){
-//			System.out.println("======High to Low======");
-//			System.out.println("Number of products:" +sortOptions.size());
-//			for(WebElement HighToLow: sortOptions) {
-//				System.out.println("List- " +HighToLow.getText());
-//			}
-//			return sortOptions;
-//	}
+
 		public boolean presenceOfhamburgerbutton() {
 			return hamburgerButton.isDisplayed();
 		}

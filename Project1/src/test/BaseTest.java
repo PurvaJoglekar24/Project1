@@ -78,7 +78,6 @@ public class BaseTest {
 	loginPage.clickOnLoginBtn();
 	loginPage.isLockedOutMessageDisplayed();
 	Assert.assertEquals(loginPage.errorMessage,"Epic sadface: Sorry, this user has been locked out.");
-//	Assert.assertEquals(driver.getCurrentUrl(), loginsheet.getRow(1).getCell(1).toString(),"URL does not match after successful login");
 	homePage.openHamburgerMenu();
 	homePage.clickOnLogoutLink();
 	
@@ -96,7 +95,7 @@ public class BaseTest {
 		loginPage.enterPassword(loginsheet.getRow(2).getCell(2).toString());
 		loginPage.clickOnLoginBtn();
 		loginPage.errormessage();
-//		Assert.assertEquals(loginPage.errorMessage, "Epic sadface: Username and password do not match any user in this service");
+
 	}
 	@Test(priority=6)
 	public void LoginWithInvalidPassword() {
@@ -104,7 +103,7 @@ public class BaseTest {
 		loginPage.enterPassword(loginsheet.getRow(3).getCell(2).toString());
 		loginPage.clickOnLoginBtn();
 		loginPage.errormessage();
-//		Assert.assertEquals(loginPage.errorMessage, "Epic sadface: Username and password do not match any user in this service");
+
 	}
 	@Test(priority=7)
 	public void loginButtonEnabled() {
